@@ -10,17 +10,38 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-            <TextBlock HorizontalAlignment="Center" FontSize="16">Редактирование пользователя</TextBlock>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical" Width="300" Margin="5">
-                    <TextBlock HorizontalAlignment="Center" FontSize="14">Данные пользователя</TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,50">
+                <StackPanel Orientation="Vertical" Width="468" Margin="5">
+                    <TextBlock HorizontalAlignment="Center" FontSize="16" Margin="0,10,0,50" FontWeight="ExtraBlack">Данные пользователя</TextBlock>
+                    <TextBlock>Имя</TextBlock>
+                    <TextBox x:Name="tBox1"></TextBox>
+                    <TextBlock>Фамилия</TextBlock>
+                    <TextBox x:Name="tBox2"></TextBox>
+                    <TextBlock>Отчество</TextBlock>
+                    <TextBox x:Name="tBox3"></TextBox>
+                    <TextBlock>Электронная почта</TextBlock>
+                    <TextBox x:Name="tBox4"></TextBox>
+                    <TextBlock>Номер телефона</TextBlock>
+                    <TextBox x:Name="tBox5"></TextBox>
                 </StackPanel>
-                <StackPanel Orientation="Vertical" Width="480" Margin="5">
-                    <TextBlock HorizontalAlignment="Center" FontSize="14">Данные учётной записи</TextBlock>
+                <StackPanel Orientation="Vertical" Width="310" Margin="5">
+                    <TextBlock HorizontalAlignment="Center" FontSize="16" Margin="0,10,0,50" FontWeight="ExtraBlack">Данные учётной записи</TextBlock>
+                    <TextBlock>Логин</TextBlock>
+                    <TextBox x:Name="tBox6"></TextBox>
+                    <TextBlock>Пароль</TextBlock>
+                    <TextBox x:Name="tBox7"></TextBox>
+                    <TextBlock>Роль пользователя</TextBlock>
+                    <ComboBox HorizontalAlignment="Left" Width="200" x:Name="cBox1"></ComboBox>
+
                 </StackPanel>
 
             </StackPanel>
 
+
+        </StackPanel>
+        <StackPanel VerticalAlignment="Bottom" Margin="10,10,10,20">
+            <Button Width="150" FontSize="16" Margin="2">Сохранить</Button>
+            <Button Width="150" FontSize="16" Margin="2">Отмена</Button>
         </StackPanel>
     </Grid>
 </Page>

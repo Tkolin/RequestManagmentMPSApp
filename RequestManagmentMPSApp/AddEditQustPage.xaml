@@ -9,14 +9,37 @@
       Title="AddEditQustPage">
 
     <Grid>
+        
         <StackPanel Orientation="Horizontal">
+          
             <StackPanel Margin="5" Width="300">
-                <TextBlock HorizontalAlignment="Center" FontSize="16">Заявка</TextBlock>
-                
+                <TextBlock HorizontalAlignment="Center" FontSize="16" FontWeight="ExtraBlack"  Margin="0,10,0,50">Заявка</TextBlock>
+                <StackPanel Margin="5">
+                    <TextBlock>Название</TextBlock>
+                    <TextBox x:Name="tBox1"></TextBox>
+                    <TextBlock>Заявитель</TextBlock>
+                    <ComboBox x:Name="cBox1"></ComboBox>
+                    <TextBlock>Дата подачи</TextBlock>
+                    <DatePicker x:Name="dPicer1"></DatePicker>
+                    <TextBlock>Тема заявки</TextBlock>
+                    <ComboBox x:Name="cBox2"></ComboBox>
+                    <TextBlock>Описание заявки</TextBlock>
+                    <TextBox x:Name="tBox2" Height="50" MaxLines="10" MinLines="10"></TextBox>
+                    <TextBlock>Статус заявки</TextBlock>
+                    <ComboBox x:Name="cBox3"></ComboBox>
+                </StackPanel>
+               
             </StackPanel>
             <StackPanel Margin="5" Width="480">
-                <TextBlock HorizontalAlignment="Center" FontSize="16">Сообщения по заявке</TextBlock>
+                <TextBlock HorizontalAlignment="Center" FontSize="16" FontWeight="ExtraBlack"  Margin="0,10,0,50">Сообщения по заявке</TextBlock>
+                <DataGrid Height="250" Margin="5">
+                    
+                </DataGrid>
             </StackPanel>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Bottom" Margin="10,10,10,20">
+            <Button Width="150" FontSize="16" Margin="2">Сохранить</Button>
+            <Button Width="150" FontSize="16" Margin="2">Отмена</Button>
         </StackPanel>
     </Grid>
 </Page>
