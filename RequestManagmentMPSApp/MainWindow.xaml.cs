@@ -23,6 +23,7 @@ namespace RequestManagmentMPSApp
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Content = new LoginPage();
         }
     }
 }

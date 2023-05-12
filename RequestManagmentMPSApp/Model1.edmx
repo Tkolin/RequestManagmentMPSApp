@@ -20,7 +20,6 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DateCreate" Type="datetime" />
-          <Property Name="ApplicantID" Type="int" />
           <Property Name="Name" Type="varchar(max)" />
           <Property Name="TopicID" Type="int" />
           <Property Name="MessageСontent" Type="varchar(max)" />
@@ -231,7 +230,6 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DateCreate" Type="DateTime" Precision="3" />
-          <Property Name="ApplicantID" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TopicID" Type="Int32" />
           <Property Name="MessageСontent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -389,7 +387,6 @@
                 <ScalarProperty Name="MessageСontent" ColumnName="MessageСontent" />
                 <ScalarProperty Name="TopicID" ColumnName="TopicID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ApplicantID" ColumnName="ApplicantID" />
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

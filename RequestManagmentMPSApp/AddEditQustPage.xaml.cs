@@ -67,7 +67,7 @@ namespace RequestManagmentMPSApp
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             cBox1.ItemsSource = RequestManagmentMPSDBEntities.GetContext().User.ToList();
-            cBox1.DisplayMemberPath = "Name";
+            cBox1.DisplayMemberPath = "LastName";
             cBox2.ItemsSource = RequestManagmentMPSDBEntities.GetContext().Topic.ToList();
             cBox2.DisplayMemberPath = "Name";
             cBox3.ItemsSource = RequestManagmentMPSDBEntities.GetContext().Status.ToList();
@@ -85,6 +85,8 @@ namespace RequestManagmentMPSApp
 
                 dataGrid.ItemsSource = request.Message;
             }
+            if (request != null && request.Message.Count > 0)
+                dataGrid.ItemsSource = request.Message;
         }
 
         private void btnDelQuast_Click(object sender, RoutedEventArgs e)
@@ -100,14 +102,24 @@ namespace RequestManagmentMPSApp
             if (dataGrid.SelectedItem == null)
                 return;
 
-            AddEditMessageWindow adw = new AddEditMessageWindow(request, user,dataGrid.SelectedItem as Message);
-             adw.ShowDialog();
+            NavigationService.Navigate( new MassagePage(request, user,dataGrid.SelectedItem as Message));
+ 
+
+
         }
 
         private void btnAddQuast_Click(object sender, RoutedEventArgs e)
         {
-            AddEditMessageWindow adw = new AddEditMessageWindow(request,user);
-             adw.ShowDialog();
+            NavigationService.Navigate(new MassagePage(request,user));
+
+
+        }
+
+
+        private void btnUpdateQuast_Click(object sender, RoutedEventArgs e)
+        {
+            if (request != null && request.Message.Count > 0)
+                dataGrid.ItemsSource = request.Message;
         }
     }
 }

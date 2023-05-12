@@ -61,12 +61,14 @@ namespace RequestManagmentMPSApp
 
             RequestManagmentMPSDBEntities.GetContext().User.Remove(dataGrid.SelectedItem as User);
             RequestManagmentMPSDBEntities.GetContext().SaveChanges();
+            Filter();
         }
         public void Filter()
         {
             List<User> list = RequestManagmentMPSDBEntities.GetContext().User.ToList();
 
-            list = list.Where(l => tBox.Text.Length > 0 && (l.LastName.ToLower().Contains(tBox.Text.ToLower()) ||
+            if(tBox.Text.Length > 0)
+            list = list.Where(l =>  (l.LastName.ToLower().Contains(tBox.Text.ToLower()) ||
                                                             l.FirstName.ToLower().Contains(tBox.Text.ToLower()) ||
                                                             l.Patronymic.ToLower().Contains(tBox.Text.ToLower()) )).ToList();
 

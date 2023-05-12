@@ -67,12 +67,13 @@ namespace RequestManagmentMPSApp
 
             RequestManagmentMPSDBEntities.GetContext().Request.Remove(dataGrid.SelectedItem as Request);
             RequestManagmentMPSDBEntities.GetContext().SaveChanges();
+            Filter();
         }
         public void Filter()
         {
             List<Request> list = RequestManagmentMPSDBEntities.GetContext().Request.ToList();
-
-            list = list.Where(l => tBox.Text.Length > 0 && l.Name.ToLower().Contains(tBox.Text.ToLower())).ToList();
+            if(tBox.Text.Length > 0)
+            list = list.Where(l =>  l.Name.ToLower().Contains(tBox.Text.ToLower())).ToList();
 
             dataGrid.ItemsSource = list;
 

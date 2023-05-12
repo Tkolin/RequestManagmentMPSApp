@@ -22,7 +22,6 @@ namespace RequestManagmentMPSApp
     
         public int ID { get; set; }
         public Nullable<System.DateTime> DateCreate { get; set; }
-        public Nullable<int> ApplicantID { get; set; }
         public string Name { get; set; }
         public Nullable<int> TopicID { get; set; }
         public string MessageСontent { get; set; }

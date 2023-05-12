@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MassagePage.xaml.cs">
+      <DependentUpon>MassagePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Message.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -90,10 +93,6 @@
     <Compile Include="User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Page Include="AddEditMessageWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AddEditQustPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,9 +109,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AddEditMessageWindow.xaml.cs">
-      <DependentUpon>AddEditMessageWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddEditQustPage.xaml.cs">
       <DependentUpon>AddEditQustPage.xaml</DependentUpon>
     </Compile>
@@ -135,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ManagmentUsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MassagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
