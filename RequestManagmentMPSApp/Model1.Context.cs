@@ -32,11 +32,11 @@ namespace RequestManagmentMPSApp
             return _context;
         }
         public virtual DbSet<Message> Message { get; set; }
+        public virtual DbSet<Request> Request { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Topic> Topic { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<Request> Request { get; set; }
     }
 }

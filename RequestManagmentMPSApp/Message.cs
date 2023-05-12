@@ -19,7 +19,7 @@ namespace RequestManagmentMPSApp
         public Nullable<int> ManagerID { get; set; }
         public string Text { get; set; }
     
-        public virtual User User { get; set; }
         public virtual Request Request { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Number" />
           </Key>
-          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RequestID" Type="int" />
           <Property Name="ManagerID" Type="int" />
           <Property Name="Text" Type="varchar(max)" />
@@ -18,7 +18,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DateCreate" Type="datetime" />
           <Property Name="ApplicantID" Type="int" />
           <Property Name="Name" Type="varchar(max)" />
@@ -55,7 +55,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="User">
@@ -70,7 +70,7 @@
           <Property Name="Email" Type="varchar(max)" />
           <Property Name="PhoneNumber" Type="varchar(max)" />
           <Property Name="RoleID" Type="int" />
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <Association Name="FK_Message_Request">
           <End Role="Request" Type="Self.Request" Multiplicity="0..1" />
@@ -181,16 +181,66 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RequestManagmentMPSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RequestManagmentMPSDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Message" EntityType="RequestManagmentMPSDBModel.Message" />
+          <EntitySet Name="Request" EntityType="RequestManagmentMPSDBModel.Request" />
+          <EntitySet Name="Role" EntityType="RequestManagmentMPSDBModel.Role" />
+          <EntitySet Name="Status" EntityType="RequestManagmentMPSDBModel.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="RequestManagmentMPSDBModel.sysdiagrams" />
+          <EntitySet Name="Topic" EntityType="RequestManagmentMPSDBModel.Topic" />
+          <EntitySet Name="User" EntityType="RequestManagmentMPSDBModel.User" />
+          <AssociationSet Name="FK_Message_Request" Association="RequestManagmentMPSDBModel.FK_Message_Request">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_User" Association="RequestManagmentMPSDBModel.FK_Message_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_Status" Association="RequestManagmentMPSDBModel.FK_Request_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_Topic" Association="RequestManagmentMPSDBModel.FK_Request_Topic">
+            <End Role="Topic" EntitySet="Topic" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_User" Association="RequestManagmentMPSDBModel.FK_Request_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="RequestManagmentMPSDBModel.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Message">
           <Key>
             <PropertyRef Name="Number" />
           </Key>
-          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RequestID" Type="Int32" />
           <Property Name="ManagerID" Type="Int32" />
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Message_User" FromRole="Message" ToRole="User" />
           <NavigationProperty Name="Request" Relationship="RequestManagmentMPSDBModel.FK_Message_Request" FromRole="Message" ToRole="Request" />
+          <NavigationProperty Name="User" Relationship="RequestManagmentMPSDBModel.FK_Message_User" FromRole="Message" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreate" Type="DateTime" Precision="3" />
+          <Property Name="ApplicantID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TopicID" Type="Int32" />
+          <Property Name="MessageСontent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="AutorID" Type="Int32" />
+          <NavigationProperty Name="Message" Relationship="RequestManagmentMPSDBModel.FK_Message_Request" FromRole="Request" ToRole="Message" />
+          <NavigationProperty Name="Status" Relationship="RequestManagmentMPSDBModel.FK_Request_Status" FromRole="Request" ToRole="Status" />
+          <NavigationProperty Name="Topic" Relationship="RequestManagmentMPSDBModel.FK_Request_Topic" FromRole="Request" ToRole="Topic" />
+          <NavigationProperty Name="User" Relationship="RequestManagmentMPSDBModel.FK_Request_User" FromRole="Request" ToRole="User" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -198,7 +248,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="RequestManagmentMPSDBModel.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -212,7 +262,7 @@
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -222,7 +272,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Request" Relationship="RequestManagmentMPSDBModel.FK_Request_Topic" FromRole="Topic" ToRole="Request" />
         </EntityType>
@@ -238,84 +288,10 @@
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="RoleID" Type="Int32" />
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Message" Relationship="Self.FK_Message_User" FromRole="User" ToRole="Message" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Message" Relationship="RequestManagmentMPSDBModel.FK_Message_User" FromRole="User" ToRole="Message" />
           <NavigationProperty Name="Request" Relationship="RequestManagmentMPSDBModel.FK_Request_User" FromRole="User" ToRole="Request" />
-        </EntityType>
-        <Association Name="FK_Message_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Message" Type="Self.Message" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Message">
-              <PropertyRef Name="ManagerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="RequestManagmentMPSDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Message" EntityType="Self.Message" />
-          <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="Status" EntityType="Self.Status" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Topic" EntityType="Self.Topic" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_Message_User" Association="Self.FK_Message_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Message" EntitySet="Message" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <EntitySet Name="Request" EntityType="RequestManagmentMPSDBModel.Request" />
-          <AssociationSet Name="FK_Message_Request" Association="RequestManagmentMPSDBModel.FK_Message_Request">
-            <End Role="Request" EntitySet="Request" />
-            <End Role="Message" EntitySet="Message" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Request_Status" Association="RequestManagmentMPSDBModel.FK_Request_Status">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="Request" EntitySet="Request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Request_Topic" Association="RequestManagmentMPSDBModel.FK_Request_Topic">
-            <End Role="Topic" EntitySet="Topic" />
-            <End Role="Request" EntitySet="Request" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Request_User" Association="RequestManagmentMPSDBModel.FK_Request_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Request" EntitySet="Request" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Request">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="DateCreate" Type="DateTime" Precision="3" />
-          <Property Name="ApplicantID" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TopicID" Type="Int32" />
-          <Property Name="MessageСontent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="StatusID" Type="Int32" />
-          <Property Name="AutorID" Type="Int32" />
-          <NavigationProperty Name="Message" Relationship="RequestManagmentMPSDBModel.FK_Message_Request" FromRole="Request" ToRole="Message" />
-          <NavigationProperty Name="Status" Relationship="RequestManagmentMPSDBModel.FK_Request_Status" FromRole="Request" ToRole="Status" />
-          <NavigationProperty Name="Topic" Relationship="RequestManagmentMPSDBModel.FK_Request_Topic" FromRole="Request" ToRole="Topic" />
-          <NavigationProperty Name="User" Relationship="RequestManagmentMPSDBModel.FK_Request_User" FromRole="Request" ToRole="User" />
+          <NavigationProperty Name="Role" Relationship="RequestManagmentMPSDBModel.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
         <Association Name="FK_Message_Request">
           <End Type="RequestManagmentMPSDBModel.Request" Role="Request" Multiplicity="0..1" />
@@ -326,6 +302,18 @@
             </Principal>
             <Dependent Role="Message">
               <PropertyRef Name="RequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_User">
+          <End Type="RequestManagmentMPSDBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="RequestManagmentMPSDBModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ManagerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -365,7 +353,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_User_Role">
+          <End Type="RequestManagmentMPSDBModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="RequestManagmentMPSDBModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -374,60 +374,10 @@
           <EntitySetMapping Name="Message">
             <EntityTypeMapping TypeName="RequestManagmentMPSDBModel.Message">
               <MappingFragment StoreEntitySet="Message">
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
-                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="RequestManagmentMPSDBModel.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Status">
-            <EntityTypeMapping TypeName="RequestManagmentMPSDBModel.Status">
-              <MappingFragment StoreEntitySet="Status">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="RequestManagmentMPSDBModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Topic">
-            <EntityTypeMapping TypeName="RequestManagmentMPSDBModel.Topic">
-              <MappingFragment StoreEntitySet="Topic">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="RequestManagmentMPSDBModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -442,6 +392,56 @@
                 <ScalarProperty Name="ApplicantID" ColumnName="ApplicantID" />
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="RequestManagmentMPSDBModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="RequestManagmentMPSDBModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RequestManagmentMPSDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topic">
+            <EntityTypeMapping TypeName="RequestManagmentMPSDBModel.Topic">
+              <MappingFragment StoreEntitySet="Topic">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="RequestManagmentMPSDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
