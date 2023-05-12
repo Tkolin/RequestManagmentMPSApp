@@ -20,7 +20,14 @@
                 <Button Margin="5,5,5,5" Click="Button_Click_3">Удалить</Button>
             </StackPanel>
             <DataGrid Height="350" AutoGenerateColumns="False" IsReadOnly="True" x:Name="dataGrid">
-
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Мироприятие (Код)" Binding="{Binding Event.ID}" Width="4*"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="3*"/>
+                    <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="3*"/>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="2*"/>
+                    <DataGridTextColumn Header="Ответственный" Binding="{Binding User.LastName}" Width="3*"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding Status.Name}" Width="2*"/>
+                </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
     </Grid>

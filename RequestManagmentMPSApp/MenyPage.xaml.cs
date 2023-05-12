@@ -20,9 +20,35 @@ namespace RequestManagmentMPSApp
     /// </summary>
     public partial class MenyPage : Page
     {
+        User user;
+        public MenyPage(User user)
+        {
+            InitializeComponent();
+            this.user = user;
+        }
         public MenyPage()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Роли
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ManagmentUsersPage(user));
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ManagmentQuestPage(user));
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

@@ -20,39 +20,62 @@ namespace RequestManagmentMPSApp
     /// </summary>
     public partial class ManagmentUsersPage : Page
     {
-        public ManagmentUsersPage()
+        User user;
+        public ManagmentUsersPage(User user)
         {
             InitializeComponent();
+            this.user = user;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.GoBack();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            Filter();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            //add
+            NavigationService.Navigate(new AddEditUsersPage());
 
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            //edit
+            if (dataGrid.SelectedItem == null)
+                return;
 
+            NavigationService.Navigate(new AddEditUsersPage(dataGrid.SelectedItem as User));
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            //del
+            if (dataGrid.SelectedItem == null)
+                return;
+
+            RequestManagmentMPSDBEntities.GetContext().User.Remove(dataGrid.SelectedItem as User);
+            RequestManagmentMPSDBEntities.GetContext().SaveChanges();
+        }
+        public void Filter()
+        {
+            List<User> list = RequestManagmentMPSDBEntities.GetContext().User.ToList();
+
+            list = list.Where(l => tBox.Text.Length > 0 && (l.LastName.ToLower().Contains(tBox.Text.ToLower()) ||
+                                                            l.FirstName.ToLower().Contains(tBox.Text.ToLower()) ||
+                                                            l.Patronymic.ToLower().Contains(tBox.Text.ToLower()) )).ToList();
+
+            dataGrid.ItemsSource = list;
 
         }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            Filter();
         }
     }
 }

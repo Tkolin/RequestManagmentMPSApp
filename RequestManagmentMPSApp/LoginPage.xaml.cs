@@ -27,7 +27,14 @@ namespace RequestManagmentMPSApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string login = tBox1.Text;
+            string password = tBox2.Text;
 
+            if (RequestManagmentMPSDBEntities.GetContext().User.Where(u => u.Login == login && u.Password == password).Count() != 0)
+            {
+                User users = RequestManagmentMPSDBEntities.GetContext().User.Where(u => u.Login == login && u.Password == password).First();
+                NavigationService.Navigate(new MenyPage(users));
+            }
         }
     }
 }
