@@ -10,19 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace RequestManagmentMPSApp
 {
     /// <summary>
-    /// Логика взаимодействия для AddEditQustPage.xaml
+    /// Логика взаимодействия для AddEditMessageWindow.xaml
     /// </summary>
-    public partial class AddEditQustPage : Page
+    public partial class AddEditMessageWindow : Window
     {
-        public AddEditQustPage()
+        public AddEditMessageWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -31,11 +35,6 @@ namespace RequestManagmentMPSApp
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
